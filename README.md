@@ -1,4 +1,4 @@
-Transformer from Scratch
+Transformer from Scratch\\
 I am a theoretical physicist exploring modern AI architectures through first-principles understanding.
 This repository follows the superb lecture by Andrej Karpathy (https://www.youtube.com/watch?v=kCc8FmEb1nY&t=5065s), where I build a Transformer model from scratch — line by line — to internalize the self-attention mechanism in full detail and connect it to my physics intuition whenever possible.
 
