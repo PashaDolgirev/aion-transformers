@@ -1,5 +1,9 @@
-I am a theoretical phycisist, and here I follow the superb lecture by A. Karpathy: https://www.youtube.com/watch?v=kCc8FmEb1nY&t=5065s.
-My goal is to dive into the self-attention mechanism, in every possible detail and connect to my physics intuition whenever possible.
+Transformer from Scratch
+I am a theoretical physicist exploring modern AI architectures through first-principles understanding.
+This repository follows the superb lecture by Andrej Karpathy (https://www.youtube.com/watch?v=kCc8FmEb1nY&t=5065s), where I build a Transformer model from scratch — line by line — to internalize the self-attention mechanism in full detail and connect it to my physics intuition whenever possible.
 
-In training a NN, I found these papers extremely useful:
-1. Residual NNs: https://arxiv.org/abs/1512.03385. Key lesson: naively, one expects that a deeper NN one has with more model parameters should result in overfitting. This is not what is observed in practice. In practice, deeper NN are more difficult to train, and the residual architecture is a way to make training of deeper NN efficient.
+
+📚 Foundational Readings
+While training neural networks, I found the following works particularly illuminating:
+1. Deep Residual Learning for Image Recognition (He et al., 2015, https://arxiv.org/abs/1512.03385)
+Key lesson: naively, one expects that a deeper NN with more model parameters would result in overfitting. This is not what is observed in practice. In practice, deeper NNs are more difficult to train, and the proposed residual architecture efficiently solves the training issue.
