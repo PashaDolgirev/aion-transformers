@@ -1,7 +1,7 @@
 Transformer from Scratch
 
-I am a theoretical physicist exploring modern AI architectures through first-principles understanding.
-This repository follows the superb lecture by Andrej Karpathy (https://www.youtube.com/watch?v=kCc8FmEb1nY&t=5065s), where I build a Transformer model from scratch — line by line — to internalize the self-attention mechanism in full detail and connect it to my physics intuition whenever possible.
+I am a theoretical physicist exploring modern AI architectures through first-hand prototyping.
+This repository follows the superb lecture by Andrej Karpathy (https://www.youtube.com/watch?v=kCc8FmEb1nY&t=5065s), where I build a Transformer model from scratch — line by line — to internalize the self-attention mechanism in full detail. I am exploring if this mechanism, as well as other NN architectures (see my locality repo for an example), can be leveraged for my physics projects on quantum material design and processing quantum simulators data. Shoot me an email (p_dolgirev@g.harvard.edu) if you have great insighs and want to collab.
 
 
 📚 Foundational Readings
