@@ -18,8 +18,8 @@ Part I: Bigram Model
 This is the simplest possible language model.
 It learns only the conditional probability distribution $P(x_t| x_{t - 1})$, meaning the model predicts the next token solely from the current one — a context window of length 1.
 Below is a screenshot of the model training. As expected, the validation loss remains relatively high, since the model ignores longer-range structure in the text:
+
 <img width="669" height="193" alt="Training curve of bigram model" src="https://github.com/user-attachments/assets/efbc248a-4587-4ed8-af4d-9e070e7bb92c" />
 
-And here is a 500-token sample generated from the trained model.
-It captures short-range patterns and local character statistics but quickly drifts — interesting to see, yet clearly far from Tiny Shakespeare:
+And here is a 500-token sample generated from the trained model - interesting to see such an example explicitly, but clearly the model is far from the Tiny Shakespeare:
 <img width="1528" height="158" alt="Sample text from bigram model" src="https://github.com/user-attachments/assets/dc13520e-e66a-4b77-8190-d3df7a94dfb5" />
