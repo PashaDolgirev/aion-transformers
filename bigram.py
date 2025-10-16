@@ -11,12 +11,12 @@ eval_interval = 300 # used for estimating loss
 learning_rate = 1e-2
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 eval_iters = 200
-n_embd = 32
 # -------------------------
 
 torch.manual_seed(1337)
 
-# !curl -O https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt
+# tinyshakespeare dataset
+# !curl -O https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt #load it once
 with open('input.txt', 'r', encoding='utf-8') as f:
     text = f.read()
 
@@ -39,7 +39,7 @@ def get_batch(split):
     data = train_data if split == 'train' else val_data
     ix = torch.randint(len(data) - block_size, (batch_size,))
     x = torch.stack([data[i:i+block_size] for i in ix])
-    y = torch.stack([data[i+1:i+block_size+1] for i in ix])
+    y = torch.stack([data[i+1:i+block_size+1] for i in ix]) #next character is the target
     x, y = x.to(device), y.to(device)
     return x, y
 
@@ -60,21 +60,18 @@ def estimate_loss():
     return out
 
 class BigramLanguageModel(nn.Module):
+    # a bigram model, predicts the next token given the current token, P(x_{t+1} | x_t) is the conditional probability table
+    # each token directly reads off the logits for the next token from a lookup table
 
     def __init__(self):
         super().__init__()
-        # Row i (of the embedding table) = logits for the next token given current token i
-        # It’s directly acting as a conditional probability table for bigrams
-        self.token_embedding_table = nn.Embedding(vocab_size, n_embd)
-        self.position_embedding_table = nn.Embedding(block_size, n_embd)
-        self.lm_head = nn.Linear(n_embd, vocab_size)
+        # Each row i of the embedding table is the logits for the next token given token i
+        self.bigram_logits = nn.Embedding(vocab_size, vocab_size)
 
     def forward(self, idx, targets=None):
         # idx and targets are both (B, T) tensor of integers
         B, T = idx.shape
-        tok_emb = self.token_embedding_table(idx) # (B, T, C)
-        pos_emb = self.position_embedding_table(torch.arange(T, device=device)) # (T, C)
-        logits = self.lm_head(tok_emb + pos_emb) # (B, T, vocab_size)
+        logits = self.bigram_logits(idx) # (B, T, vocab_size)
 
         if targets is None:
             loss = None
@@ -87,12 +84,13 @@ class BigramLanguageModel(nn.Module):
         # idx is (B, T) array of indices in the current context
         for _ in range(max_new_tokens):
             last = idx[:, -1]                           # (B,)
-            logits = self.token_embedding_table(last)   # (B, C)
+            logits = self.bigram_logits(last)   # (B, C)
             probs = F.softmax(logits, dim=-1)           # (B, C)
             idx_next = torch.multinomial(probs, num_samples=1)
             idx = torch.cat((idx, idx_next), dim=1)     # (B, T+1)
         return idx
     
+
 model = BigramLanguageModel()
 model = model.to(device)
 
