@@ -14,6 +14,7 @@ While training neural networks, I found the following works particularly illumin
 
 
 Part I: Bigram Model
+
 (Run with: python bigram.py)
 This is the simplest possible language model.
 It learns only the conditional probability distribution $P(x_t| x_{t - 1})$, meaning the model predicts the next token solely from the current one — a context window of length 1.
