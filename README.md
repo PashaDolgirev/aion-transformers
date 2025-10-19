@@ -32,4 +32,4 @@ Run: python SelfAttention_example.py to see an example with a single-head attent
 The masking used when computing wei (where the upper-triangular part is set to $-\infty$, see Head()) is reminiscent of the causality principle in physics -- tokens can only attend to past ones. This makes the self-attention mechanism feel almost physically grounded. If we extend the notion of keys and queries into a many-body quantum-physics context, they could represent operators designed to extract non-trivial correlations within the system. The transformer, in this sense, attempts to learn such operators automatically, suggesting that one may not need a full microscopic understanding of the system before analyzing it.
 
 Here is the training progression -- we observe only a slight improvement over the bigram model; the generated text is not yet substantially better. There’s still a long way to go before the full transformer architecture comes together:
-![alt text](image-1.png)
+![alt text](images/sa_training.png)
