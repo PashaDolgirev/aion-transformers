@@ -8,9 +8,9 @@ from torch.nn import functional as F
 # hyperparameters
 batch_size = 32
 block_size = 8 # context length
-max_iters = 3000
-eval_interval = 300 # used for estimating loss
-learning_rate = 1e-2
+max_iters = 5000
+eval_interval = 250 # used for estimating loss
+learning_rate = 1e-3
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 eval_iters = 200
 n_embd = 32 # now we have an embedding dimension (one hot encoding is replaced by learned continuous vectors)
@@ -34,7 +34,7 @@ decode = lambda l: ''.join([itos[i] for i in l]) #take a list of integers -> out
 
 # data
 data = torch.tensor(encode(text), dtype=torch.long) #convert to tensor
-n = int(0.9 * len(data)) #90% for training, 10% for validation|
+n = int(0.9 * len(data)) #90% for training, 10% for validation
 train_data = data[:n]
 val_data = data[n:]
 
@@ -82,21 +82,23 @@ class Head(nn.Module):
         k, q, v = self.key(x), self.query(x), self.value(x)
 
         #compute attention affinities
-        wei = q @ k.transpose(-2, -1) * self.head_size**-0.5 # --> (B, T, T)
+        wei = q @ k.transpose(-2, -1) * self.head_size**-0.5 # --> (B, T, T); note the scaling factor
         wei = wei.masked_fill(self.tril[:T, :T] == 0, float('-inf')) # (B, T, T)
         wei = F.softmax(wei, dim=-1)
         wei = self.dropout(wei)
-        
+
         # perform the weighted aggregation of the values
-        out = wei @ v # (B, T, head_size)
+        out = wei @ v # (B, T, head_size) --- this is Eq. (1) in the Attention is All You Need paper 
         return out
 
-class BigramLanguageModel(nn.Module):
+class FullModel(nn.Module):
+    # progressively build the full language model --> here, focus is on the self-attention part
 
     def __init__(self):
         super().__init__()
         self.token_embedding_table = nn.Embedding(vocab_size, n_embd)
-        self.position_embedding_table = nn.Embedding(block_size, n_embd) # note the addition of positional encoding 
+        self.position_embedding_table = nn.Embedding(block_size, n_embd) # note the addition of positional encoding (the only way the model knows the order of the sequence )
+        self.sa_head = Head(n_embd) # single head self-attention; here, head_size = n_embd
         self.lm_head = nn.Linear(n_embd, vocab_size)
 
     def forward(self, idx, targets=None):
@@ -106,6 +108,7 @@ class BigramLanguageModel(nn.Module):
         tok_emb = self.token_embedding_table(idx) # (B, T, n_embd)
         pos_emb = self.position_embedding_table(torch.arange(T, device=device)) # (T, n_embd)
         x = tok_emb + pos_emb # (B, T, n_embd) 
+        x = self.sa_head(x) # self-attention layer 
         logits = self.lm_head(x) # (B, T, vocab_size)
 
         if targets is None:
@@ -118,7 +121,7 @@ class BigramLanguageModel(nn.Module):
     def generate(self, idx, max_new_tokens):
         # idx is (B, T) array of indices in the current context
         for _ in range(max_new_tokens):
-            ind_cond = idx[:, -block_size:]
+            ind_cond = idx[:, -block_size:] 
             logits, _ = self(ind_cond)
             logits = logits[:, -1, :] 
             probs = F.softmax(logits, dim=-1)           # (B, C)
@@ -127,7 +130,7 @@ class BigramLanguageModel(nn.Module):
         return idx
     
 
-model = BigramLanguageModel()
+model = FullModel()
 model = model.to(device)
 
 optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate)

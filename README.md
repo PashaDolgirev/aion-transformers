@@ -24,3 +24,12 @@ Below is a screenshot of the model training. As expected, the validation loss re
 
 And here is a 500-token sample generated from the trained model - interesting to see such an example explicitly, but clearly the model is far from the Tiny Shakespeare:
 <img width="1528" height="158" alt="Sample text from bigram model" src="https://github.com/user-attachments/assets/dc13520e-e66a-4b77-8190-d3df7a94dfb5" />
+
+
+Part II: Self-Attention
+
+Run: python SelfAttention_example.py to see an example with a single-head attention mechanism.
+The masking used when computing wei (where the upper-triangular part is set to $-\infty$, see Head()) is reminiscent of the causality principle in physics -- tokens can only attend to past ones. This makes the self-attention mechanism feel almost physically grounded. If we extend the notion of keys and queries into a many-body quantum-physics context, they could represent operators designed to extract non-trivial correlations within the system. The transformer, in this sense, attempts to learn such operators automatically, suggesting that one may not need a full microscopic understanding of the system before analyzing it.
+
+Here is the training progression -- we observe only a slight improvement over the bigram model; the generated text is not yet substantially better. There’s still a long way to go before the full transformer architecture comes together:
+![alt text](image-1.png)
