@@ -53,4 +53,4 @@ Since learning also appeared less efficient, I subsequently added layer normaliz
 By adding residual connections (mini_transformer_p3.py), I observed a substantial improvement in training stability —- the validation error dropped to about 2.08 without the need to increase the number of epochs (the issue of overfitting still persisted):
 ![alt text](images/mt_3_training_resid.png)
 Layer normalization (mini_transformer_p4.py) didn't seem to do much, barely improving the validation performance (by about 0.01) so far. Finally, dropout helped with overfitting quite effectively (mini_transformer_p5.py), as the training and validation errors became appreciably closer:
-![alt text](images/droput_mt.png)
+![alt text](images/dropout_mt.png)
