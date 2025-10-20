@@ -55,3 +55,15 @@ By adding residual connections (mini_transformer_p3.py), I observed a substantia
 ![alt text](images/mt_3_training_resid.png)
 Layer normalization (mini_transformer_p4.py) didn't seem to do much, barely improving the validation performance (by about 0.01) so far. Finally, dropout helped with overfitting quite effectively (mini_transformer_p5.py), as the training and validation errors became appreciably closer:
 ![alt text](images/dropout_mt.png)
+
+
+Part IV: Parameter choice, best model, and conclusions
+
+Up to this point, there were many hyperparameters that made me a bit uneasy.
+The most frustrating ones were the learning rate and the number of epochs. To address this, I added a learning-rate scheduler that automatically decreases the rate when the validation loss plateaus, ensuring a smoother and more stable convergence.
+A second uncertainty was the number of Transformer blocks. I now scan this parameter from 1 to 4 to quantify its impact on performance.
+Third, I wanted to understand the role of dropout, so I sweep over values [0.0, 0.1, 0.2] to examine how regularization affects the training and generalization.
+There are, of course, many other hyperparameters of interest -- such as the number of hidden layers in the feed-forward network, the embedding dimensionality n_embd, and the number of attention heads.
+Guided by Karpathy’s lecture, I increased these values moderately compared to the earlier parts of this project, balancing expressivity and runtime. The full set of experiments and chosen parameters are implemented in find_best_minitransformer.py.
+For practical reasons, I use smaller architectures compared to the final architecture in the lecture so that the code can run on a laptop CPU/GPU. In a real research setting, I would scale up the model and launch the parameter sweeps on a GPU server for a thorough search.
+Curious readers are encouraged to experiment with these hyperparameters themselves -- the framework is already designed to make such exploration straightforward.
