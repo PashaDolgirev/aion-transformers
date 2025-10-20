@@ -43,10 +43,11 @@ Part III: Mini-transformer (add feed-forward NN, layer normalizaiton, repeat thi
 After adding a feed-forward neural network right after the multi-head attention layer (mini_transformer_p1.py), the validation error dropped further to about 2.2.
 Next, following the lecture, I stacked three Transformer blocks (each consisting of multi-head attention followed by a feed-forward network; mini_transformer_p2.py).
 Here I observed that:
-\begin{itemize}
-\item Training required many more epochs —- convergence became noticeably less efficient.
-\item The validation error appears roughly 0.1 higher than the training error, a sign of overfitting.
-\end{itemize}
+
+- Training required many more epochs —- convergence became noticeably less efficient.
+
+- The validation error appears roughly 0.1 higher than the training error, a sign of overfitting.
+
 This suggested the need for regularization, motivating the introduction of dropout to mitigate overfitting.
 Since learning also appeared less efficient, I subsequently added layer normalization and residual connections.
 
