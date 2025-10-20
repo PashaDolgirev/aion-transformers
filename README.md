@@ -1,10 +1,10 @@
-Transformer from Scratch
+**Transformer from Scratch**
 
 I am a theoretical physicist exploring modern AI architectures through first-hand prototyping.
 This repository follows the superb lecture by Andrej Karpathy (https://www.youtube.com/watch?v=kCc8FmEb1nY&t=5065s), where I build a Transformer model from scratch — line by line — to internalize the self-attention mechanism in full detail. I am exploring if this mechanism, as well as other NN architectures (see my locality repo for an example), can be leveraged for my physics projects on quantum material design and processing quantum simulators data. Shoot me an email (p.e.dolgirev@gmail.com) if you have great insighs and want to collab.
 
 
-📚 Foundational Readings
+**📚 Foundational Readings**
 
 While training neural networks, I found the following works particularly illuminating:
 1. Deep Residual Learning for Image Recognition (He et al., 2015, https://arxiv.org/abs/1512.03385). Key lesson: naively, one expects that a deeper NN with more model parameters would result in overfitting. This is not what is observed in practice. In practice, deeper NNs are more difficult to train, and the proposed residual architecture efficiently solves the training issue.
@@ -15,7 +15,7 @@ While training neural networks, I found the following works particularly illumin
 Dropout acts as a form of ensemble regularization (over many similar but distinct neural nets), forcing the network to learn more robust internal representations.
 
 
-Part I: Bigram Model
+**Part I: Bigram Model**
 
 (Run with: python bigram.py)
 This is the simplest possible language model.
@@ -27,7 +27,7 @@ Below is a screenshot of the model training. As expected, the validation loss re
 And here is a 500-token sample generated from the trained model -- interesting to see such an example explicitly, but clearly the model is far from the Tiny Shakespeare:
 ![alt text](images/bigram_gen.png)
 
-Part II: Self-Attention
+**Part II: Self-Attention**
 
 Run: python SelfAttention_example.py to see an example with a single-head attention mechanism.
 The masking used when computing wei (where the upper-triangular part is set to $-\infty$, see Head()) is reminiscent of the causality principle in physics -- tokens can only attend to past ones. This makes the self-attention mechanism feel almost physically grounded. If we extend the notion of keys and queries into a many-body quantum-physics context, they could represent operators designed to extract non-trivial correlations within the system. The transformer, in this sense, attempts to learn such operators automatically, suggesting that one may not need a full microscopic understanding of the system before analyzing it.
@@ -37,7 +37,7 @@ Here is the training progression -- we observe only a slight improvement over th
 Run: python multi_head_sa_example.py to see an example with four attention heads. The validation error drops from about 2.4 \to about 2.28, a reduction comparable to the improvement achieved when moving from the bigram model to the single-head attention. 
 This suggests that using multiple heads with smaller head sizes allows the model to extract more, partially independent correlation channels -- leading to a modest but meaningful performance gain.
 
-Part III: Mini-transformer (add feed-forward NN, layer normalizaiton, repeat this block multiple times)
+**Part III: Mini-transformer (add feed-forward NN, layer normalizaiton, repeat this block multiple times)**
 
 
 After adding a feed-forward neural network right after the multi-head attention layer (mini_transformer_p1.py), the validation error dropped further to about 2.2.
@@ -57,15 +57,35 @@ Layer normalization (mini_transformer_p4.py) didn't seem to do much, barely impr
 ![alt text](images/dropout_mt.png)
 
 
-Part IV: Parameter choice, best model, and conclusions
+**Part IV: Parameter choice, best model, and conclusions**
 
-Up to this point, there were many hyperparameters that made me a bit uneasy.
-The most frustrating ones were the learning rate and the number of epochs. To address this, I added a learning-rate scheduler that automatically decreases the rate when the validation loss plateaus, ensuring a smoother and more stable convergence.
-A second uncertainty was the number of Transformer blocks. I now scan this parameter from 1 to 4 to quantify its impact on performance.
-Third, I wanted to understand the role of dropout better, so I sweep over values [0.0, 0.1, 0.2] to examine how regularization affects the training and generalization.
+Up to this point, there were several hyperparameters I wanted to understand more systematically.
+First of all, I introduced a learning-rate scheduler that automatically reduces the rate when the validation loss plateaus.
+This makes training smoother and more stable and removes the need to hand-tune the learning rate—something that is otherwise critical in practice.
+Second, I wanted to explore different architectures, and to this end I varied the number of Transformer blocks from 1 to 4 to quantify its impact on performance. Third, to study regularization, I swept dropout across [0.0, 0.1, 0.2] and observed how it changes both training dynamics and generalization.
+
 There are, of course, many other hyperparameters of interest -- such as the number of hidden layers in the feed-forward network, the embedding dimensionality n_embd, and the number of attention heads.
 Guided by Karpathy’s lecture, I increased these values moderately compared to the earlier parts of this project, balancing expressivity and runtime. The full set of experiments and chosen parameters are implemented in find_best_minitransformer.py.
 For practical reasons, I use smaller architectures compared to the final architecture in the lecture so that the code can run on a laptop CPU/GPU. In a real research setting, I would scale up the model and launch the parameter sweeps on a GPU server for a thorough search.
 Curious readers are encouraged to experiment with these hyperparameters themselves -- the framework is already designed to make such exploration straightforward.
 
+Exploring 12 different models, the best model was obtained with dropout 0.0 (this is because the validation-training gap is modest here, see the learning curve below) and 4 Transformer blocks:
+
 ![alt text](images/best_architecture.png)
+
+Learning curve (analyze_and_plot.ipynb) -- a textbook shape:
+
+![alt text](images/learning_best.png)
+
+Generated text sample -- reasonably close in style to Tiny Shakespeare (though, naturally, not that semantically coherent):
+![alt text](image.png)
+
+
+
+
+
+
+
+
+
+
