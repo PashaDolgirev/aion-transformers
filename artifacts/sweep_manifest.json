@@ -1,0 +1,157 @@
+{
+  "runs": [
+    {
+      "run_name": "drop0.0_blocks1",
+      "best_val": 1.809133768081665,
+      "best_iter": 4950,
+      "best_ckpt": "artifacts/checkpoints/drop0.0_blocks1_best.pt",
+      "curves_json": "artifacts/curves/drop0.0_blocks1_curves.json",
+      "seconds": 299.543625831604,
+      "config": {
+        "dropout": 0.0,
+        "num_blocks": 1
+      }
+    },
+    {
+      "run_name": "drop0.0_blocks2",
+      "best_val": 1.717432975769043,
+      "best_iter": 4950,
+      "best_ckpt": "artifacts/checkpoints/drop0.0_blocks2_best.pt",
+      "curves_json": "artifacts/curves/drop0.0_blocks2_curves.json",
+      "seconds": 569.6611771583557,
+      "config": {
+        "dropout": 0.0,
+        "num_blocks": 2
+      }
+    },
+    {
+      "run_name": "drop0.0_blocks3",
+      "best_val": 1.6703158617019653,
+      "best_iter": 4850,
+      "best_ckpt": "artifacts/checkpoints/drop0.0_blocks3_best.pt",
+      "curves_json": "artifacts/curves/drop0.0_blocks3_curves.json",
+      "seconds": 801.5998289585114,
+      "config": {
+        "dropout": 0.0,
+        "num_blocks": 3
+      }
+    },
+    {
+      "run_name": "drop0.0_blocks4",
+      "best_val": 1.6477316617965698,
+      "best_iter": 4600,
+      "best_ckpt": "artifacts/checkpoints/drop0.0_blocks4_best.pt",
+      "curves_json": "artifacts/curves/drop0.0_blocks4_curves.json",
+      "seconds": 1090.6193039417267,
+      "config": {
+        "dropout": 0.0,
+        "num_blocks": 4
+      }
+    },
+    {
+      "run_name": "drop0.1_blocks1",
+      "best_val": 1.858596920967102,
+      "best_iter": 4800,
+      "best_ckpt": "artifacts/checkpoints/drop0.1_blocks1_best.pt",
+      "curves_json": "artifacts/curves/drop0.1_blocks1_curves.json",
+      "seconds": 371.23925375938416,
+      "config": {
+        "dropout": 0.1,
+        "num_blocks": 1
+      }
+    },
+    {
+      "run_name": "drop0.1_blocks2",
+      "best_val": 1.764663815498352,
+      "best_iter": 4750,
+      "best_ckpt": "artifacts/checkpoints/drop0.1_blocks2_best.pt",
+      "curves_json": "artifacts/curves/drop0.1_blocks2_curves.json",
+      "seconds": 628.0665080547333,
+      "config": {
+        "dropout": 0.1,
+        "num_blocks": 2
+      }
+    },
+    {
+      "run_name": "drop0.1_blocks3",
+      "best_val": 1.7067707777023315,
+      "best_iter": 4850,
+      "best_ckpt": "artifacts/checkpoints/drop0.1_blocks3_best.pt",
+      "curves_json": "artifacts/curves/drop0.1_blocks3_curves.json",
+      "seconds": 879.1470210552216,
+      "config": {
+        "dropout": 0.1,
+        "num_blocks": 3
+      }
+    },
+    {
+      "run_name": "drop0.1_blocks4",
+      "best_val": 1.6912806034088135,
+      "best_iter": 4800,
+      "best_ckpt": "artifacts/checkpoints/drop0.1_blocks4_best.pt",
+      "curves_json": "artifacts/curves/drop0.1_blocks4_curves.json",
+      "seconds": 1182.5610270500183,
+      "config": {
+        "dropout": 0.1,
+        "num_blocks": 4
+      }
+    },
+    {
+      "run_name": "drop0.2_blocks1",
+      "best_val": 1.9021998643875122,
+      "best_iter": 4800,
+      "best_ckpt": "artifacts/checkpoints/drop0.2_blocks1_best.pt",
+      "curves_json": "artifacts/curves/drop0.2_blocks1_curves.json",
+      "seconds": 342.0195758342743,
+      "config": {
+        "dropout": 0.2,
+        "num_blocks": 1
+      }
+    },
+    {
+      "run_name": "drop0.2_blocks2",
+      "best_val": 1.8069418668746948,
+      "best_iter": 4950,
+      "best_ckpt": "artifacts/checkpoints/drop0.2_blocks2_best.pt",
+      "curves_json": "artifacts/curves/drop0.2_blocks2_curves.json",
+      "seconds": 605.9746840000153,
+      "config": {
+        "dropout": 0.2,
+        "num_blocks": 2
+      }
+    },
+    {
+      "run_name": "drop0.2_blocks3",
+      "best_val": 1.755628228187561,
+      "best_iter": 4850,
+      "best_ckpt": "artifacts/checkpoints/drop0.2_blocks3_best.pt",
+      "curves_json": "artifacts/curves/drop0.2_blocks3_curves.json",
+      "seconds": 830.8100509643555,
+      "config": {
+        "dropout": 0.2,
+        "num_blocks": 3
+      }
+    },
+    {
+      "run_name": "drop0.2_blocks4",
+      "best_val": 1.7336664199829102,
+      "best_iter": 4650,
+      "best_ckpt": "artifacts/checkpoints/drop0.2_blocks4_best.pt",
+      "curves_json": "artifacts/curves/drop0.2_blocks4_curves.json",
+      "seconds": 1090.8992240428925,
+      "config": {
+        "dropout": 0.2,
+        "num_blocks": 4
+      }
+    }
+  ],
+  "global_best": {
+    "val_loss": 1.6477316617965698,
+    "run_name": "drop0.0_blocks4",
+    "ckpt_best_path": "artifacts/checkpoints/drop0.0_blocks4_best.pt",
+    "config": {
+      "dropout": 0.0,
+      "num_blocks": 4
+    }
+  }
+}
