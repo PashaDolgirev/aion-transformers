@@ -78,7 +78,7 @@ Learning curve (analyze_and_plot.ipynb) -- a textbook shape:
 ![alt text](images/learning_best.png)
 
 Generated text sample -- reasonably close in style to Tiny Shakespeare (though, naturally, not that semantically coherent):
-![alt text](image.png)
+![alt text](images/gen_best.png)
 
 
 
