@@ -69,7 +69,7 @@ Guided by Karpathy’s lecture, I increased these values moderately compared to 
 For practical reasons, I use smaller architectures compared to the final architecture in the lecture so that the code can run on a laptop CPU/GPU. In a real research setting, I would scale up the model and launch the parameter sweeps on a GPU server for a thorough search.
 Curious readers are encouraged to experiment with these hyperparameters themselves -- the framework is already designed to make such exploration straightforward.
 
-Exploring 12 different models, the best model was obtained with dropout 0.0 (this is because the validation-training gap is modest here, see the learning curve below; also could reflect that the chosen architectures are not that deep -- I suspect that for deeper models, we would have learned a nonzero dropout) and 4 Transformer blocks:
+Exploring 12 different models, the best model was obtained with dropout 0.0 (this is because the validation-training gap is modest here, see the learning curve below; also could reflect that the chosen architectures are not that deep -- deeper models should eventually face overfitting, in which case a nonzero dropout is expected) and 4 Transformer blocks:
 
 ![alt text](images/best_architecture.png)
 
