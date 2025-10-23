@@ -64,7 +64,7 @@ Layer normalization (mini_transformer_p4.py) didn't seem to do much, barely impr
 
 Up to this point, there were several hyperparameters I wanted to understand more systematically.
 First of all, I introduced a learning-rate scheduler that automatically reduces the rate when the validation loss plateaus.
-This makes training smoother and more stable and removes the need to hand-tune the learning rate—something that is otherwise critical in practice.
+This makes training smoother and more stable and removes the need to hand-tune the learning rate -- something that is otherwise critical in practice.
 Second, I wanted to explore different architectures, and to this end I varied the number of Transformer blocks from 1 to 4 to quantify its impact on performance. Third, to study regularization, I swept dropout across [0.0, 0.1, 0.2] and observed how it changes both training dynamics and generalization.
 
 There are, of course, many other hyperparameters of interest -- such as the number of hidden layers in the feed-forward network, the embedding dimensionality n_embd, and the number of attention heads.
